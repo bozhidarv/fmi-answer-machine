@@ -3,31 +3,16 @@ import './App.css'
 import { TextField, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper} from '@mui/material'
 import Fuse from 'fuse.js'
 import questions from './questions.json'
-import { v4 as uuid4 } from 'uuid'
 
 const FUSE_OPTIONS = {
-	// isCaseSensitive: false,
-	// includeScore: false,
-	// shouldSort: true,
-	// includeMatches: false,
-	// findAllMatches: false,
-	// minMatchCharLength: 1,
-	// location: 0,
-	// threshold: 0.6,
-	// distance: 100,
-	// useExtendedSearch: false,
-	// ignoreLocation: false,
-	// ignoreFieldNorm: false,
-	// fieldNormWeight: 1,
 	keys: [
 		"q"
 	]
 };
-
+const fuse = new Fuse(questions, FUSE_OPTIONS)
 function App() {
   const [input, setInput] = useState("")
   const [options, setOptions] = useState([])
-  const fuse = new Fuse(questions, FUSE_OPTIONS)
 
   useEffect(() => {
     setOptions(fuse.search(input))
