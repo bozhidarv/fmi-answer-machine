@@ -11,14 +11,26 @@ import {
   Paper,
 } from "@mui/material";
 import Fuse from "fuse.js";
+
 import questions from "./questions.json";
 
 const FUSE_OPTIONS = {
   keys: ["q"],
 };
+
+/**
+ * @typedef {Object} Option
+ * @property {{q: string, a: string}} item
+ * @property {number} refIndex
+ */
 const fuse = new Fuse(questions, FUSE_OPTIONS);
 function App() {
+  /** @type {string} */
   const [input, setInput] = useState("");
+
+  /**
+   * @type {[Option[], React.Dispatch<React.SetStateAction<Option[]>>]} state
+   * */
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
